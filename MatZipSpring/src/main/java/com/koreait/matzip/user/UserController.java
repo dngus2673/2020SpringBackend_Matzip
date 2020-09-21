@@ -37,7 +37,16 @@ public class UserController {
 			hs.setAttribute(Const.LOGIN_USER, param);
 			return "redirect:/rest/map";
 		}
-		ra.addAttribute("param", param);
+		
+		String msg = null;
+		if(result == Const.NO_ID) {
+			msg = "아이디를 확인해 주세요.";
+		} else if(result == Const.NO_PW) {
+			msg = "비밀번호를 확인해 주세요.";
+		}
+		
+		param.setMsg(msg);
+		ra.addFlashAttribute("data", param);
 		return "redirect:/user/login";
 	}
 	
@@ -54,14 +63,15 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/join", method = RequestMethod.POST)
-	public String join(UserVO param) {
+	public String join(UserVO param, RedirectAttributes ra) {
 		int result = service.join(param);
 		
 		if(result == 1) {
 			return "redirect:/user/login"; 
 		}
 		
-		return "redirect:/user/join?err=" + result;
+		ra.addAttribute("err", result);
+		return "redirect:/user/join";
 	}
 }
 
