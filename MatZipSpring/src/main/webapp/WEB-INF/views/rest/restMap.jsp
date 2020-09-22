@@ -101,8 +101,7 @@
 		    } else {
 		        target.attachEvent('on' + type, callback);
 		    }
-		}
-		
+		}		
 		
 		// check for Geolocation support
 		if (navigator.geolocation) {

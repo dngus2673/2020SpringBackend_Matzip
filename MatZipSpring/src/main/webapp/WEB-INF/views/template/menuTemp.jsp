@@ -35,8 +35,13 @@
 				</c:if>			
 			</div>
 			<div id="headerRight">
-				<a href="/restaurant/restMap">지도</a>
-				<a class="ml15" href="/rest/restReg">등록</a>
+				<a href="/rest/map">지도</a>
+				<c:if test="${loginUser != null}">
+					<a class="ml15" href="/rest/restReg">등록</a>
+				</c:if>
+				<c:if test="${loginUser == null}">
+					<a class="ml15" href="#" onclick="alert('로그인이 필요합니다.')">등록</a>
+				</c:if>
 				<a class="ml15" href="/user/restFavorite">찜</a>
 			</div>
 		</header>
