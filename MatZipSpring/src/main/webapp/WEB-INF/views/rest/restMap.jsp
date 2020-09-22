@@ -96,7 +96,7 @@
 		}
 		
 		function addEvent(target, type, callback) {
-			 if (target.addEventListener) {
+			if (target.addEventListener) {
 			    target.addEventListener(type, callback);
 		    } else {
 		        target.attachEvent('on' + type, callback);
