@@ -13,7 +13,10 @@
 	
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1ab3d71d45b40c5eaec83805c9a73569"></script>
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-	<script>			
+	<script>		
+	
+		var markerList = [] //마커 리스트
+		
 		const options = { //지도를 생성할 때 필요한 기본 옵션
 			center: new kakao.maps.LatLng(35.958437, 128.486084), //지도의 중심좌표.
 			level: 5 //지도의 레벨(확대, 축소 정도)
@@ -22,6 +25,11 @@
 		const map = new kakao.maps.Map(mapContainer, options);
 		
 		function getRestaurantList() {
+			//마커 모두 지우기
+			markerList.forEach(function(marker) {
+				marker.setMap(null)
+			})
+			
 			const bounds = map.getBounds()
 			const southWest = bounds.getSouthWest()
 			const northEast = bounds.getNorthEast()
@@ -47,7 +55,7 @@
 			})		
 		}
 		
-		kakao.maps.event.addListener(map, 'dragend', getRestaurantList)   
+		kakao.maps.event.addListener(map, 'tilesloaded', getRestaurantList)   
 		
 		//마커생성
 		function createMarker(item) {			
@@ -79,6 +87,8 @@
 			})
 			
 			marker.setMap(map)
+			
+			markerList.push(marker)
 		}
 		
 		function moveToDetail(i_rest) {
