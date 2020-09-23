@@ -42,7 +42,7 @@ public class RestController {
 		return service.selRestList(param);
 	}
 	
-	@RequestMapping("/restReg")
+	@RequestMapping("/reg")
 	public String restReg(Model model) {
 		model.addAttribute("categoryList", service.selCategoryList());
 		
@@ -51,11 +51,11 @@ public class RestController {
 		return ViewRef.TEMP_MENU_TEMP;
 	}
 	
-	@RequestMapping(value="/restReg", method=RequestMethod.POST)
+	@RequestMapping(value="/reg", method=RequestMethod.POST)
 	public String restReg(RestPARAM param, HttpSession hs) {
 		param.setI_user(SecurityUtils.getLoginUserPk(hs));		
 		int result = service.insRest(param);
-		return "redirect:/rest/map";
+		return "redirect:/";
 	}
 	
 	@RequestMapping("/detail")
@@ -67,6 +67,19 @@ public class RestController {
 		return ViewRef.TEMP_MENU_TEMP;
 	}
 	
+	@RequestMapping("/del")
+	public String del(RestPARAM param, HttpSession hs) {
+		int loginI_user = SecurityUtils.getLoginUserPk(hs);
+		param.setI_user(loginI_user);
+		int result = 1;
+		try {
+			service.delRestTran(param);
+		} catch(Exception e) {
+			result = 0;
+		}		
+		System.out.println("result : " + result);
+		return "redirect:/";
+	}
 	
 }
 
