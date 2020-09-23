@@ -74,11 +74,12 @@ public class RestService {
 		List<RestRecMenuVO> list = new ArrayList();
 		
 		for(int i=0; i<menuNmArr.length; i++) {
-			RestRecMenuVO vo = new RestRecMenuVO();
+			RestRecMenuVO vo = new RestRecMenuVO();			
 			list.add(vo);
-			
+						
 			String menu_nm = menuNmArr[i];
 			int menu_price = CommonUtils.parseStringToInt(menuPriceArr[i]);
+			vo.setI_rest(i_rest);
 			vo.setMenu_nm(menu_nm);
 			vo.setMenu_price(menu_price);
 			
@@ -96,6 +97,10 @@ public class RestService {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}
+		
+		for(RestRecMenuVO vo : list) {
+			mapper.insRestRecMenu(vo);
 		}
 		
 		return i_rest;

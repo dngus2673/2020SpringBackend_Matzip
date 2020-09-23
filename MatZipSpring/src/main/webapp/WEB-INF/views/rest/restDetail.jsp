@@ -33,7 +33,7 @@
 				<div>
 					<div><button type="button" onclick="addRecMenu()">추천 메뉴 추가</button></div>
 					<form id="recFrm" action="/rest/recMenus" enctype="multipart/form-data" method="post">
-						<input type="hidden" name="i_rest" value="${data.i_rest}">
+						<input type="hidden1" name="i_rest" value="${data.i_rest}">
 						<div id="recItem"></div>
 						<div><input type="submit" value="등록"></div>
 					</form>
