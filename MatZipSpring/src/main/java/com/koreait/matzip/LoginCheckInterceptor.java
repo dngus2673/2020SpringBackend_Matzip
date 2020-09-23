@@ -9,7 +9,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import com.koreait.matzip.user.model.UserPARAM;
 
 public class LoginCheckInterceptor extends HandlerInterceptorAdapter {
-	
+		
 	@Override
 	public boolean preHandle(HttpServletRequest request, 
 			HttpServletResponse response, Object handler) throws Exception {		
