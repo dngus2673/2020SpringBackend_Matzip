@@ -32,6 +32,10 @@ public class RestService {
 	public List<RestDMI> selRestList(RestPARAM param) {
 		return mapper.selRestList(param);
 	}
+	
+	public List<RestRecMenuVO> selRestRecMenu(RestPARAM param) {		
+		return mapper.selRestRecMenus(param);
+	}
 
 	public List<CodeVO> selCategoryList() {
 		CodeVO p = new CodeVO();
@@ -106,7 +110,26 @@ public class RestService {
 		return i_rest;
 	}
 	
-	
+	public int delRecMenu(RestPARAM param, String realPath) {
+		//파일 삭제
+		List<RestRecMenuVO> list = mapper.selRestRecMenus(param);
+		if(list.size() == 1) {
+			RestRecMenuVO item = list.get(0);
+			
+			if(item.getMenu_pic() != null && !item.getMenu_pic().equals("")) { //이미지 있음 > 삭제!!
+				File file = new File(realPath + item.getMenu_pic());
+				if(file.exists()) {
+					if(file.delete()) {
+						return mapper.delRestRecMenu(param);
+					} else {
+						return 0;
+					}
+				}
+			}
+		}		
+		
+		return mapper.delRestRecMenu(param);
+	}
 	
 	
 	
