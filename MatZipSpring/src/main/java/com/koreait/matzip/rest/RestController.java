@@ -10,6 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.koreait.matzip.Const;
 import com.koreait.matzip.SecurityUtils;
@@ -79,6 +82,15 @@ public class RestController {
 		}		
 		System.out.println("result : " + result);
 		return "redirect:/";
+	}
+	
+	@RequestMapping(value="/recMenus", method=RequestMethod.POST)
+	public String recMenus(MultipartHttpServletRequest mReq, RedirectAttributes ra) {
+				
+		int i_rest = service.insRecMenus(mReq);
+		
+		ra.addAttribute("i_rest", i_rest);
+		return "redirect:/rest/detail";
 	}
 	
 }
