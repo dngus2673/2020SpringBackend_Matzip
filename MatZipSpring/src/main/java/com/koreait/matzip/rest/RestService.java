@@ -79,7 +79,7 @@ public class RestService {
 		String[] menuNmArr = mReq.getParameterValues("menu_nm");
 		String[] menuPriceArr = mReq.getParameterValues("menu_price");
 		
-		String path = mReq.getServletContext().getRealPath("/resources/img/rest/" + i_rest + "/rec_menu/");
+		String path = Const.realPath + "/resources/img/rest/" + i_rest + "/rec_menu/";
 		
 		List<RestRecMenuVO> list = new ArrayList();
 		
@@ -127,11 +127,11 @@ public class RestService {
 		return mapper.delRestRecMenu(param);
 	}
 	
-	public int insMenus(RestFile param, int i_user) {		
+	public int insRestMenu(RestFile param, int i_user) {		
 		if(_authFail(param.getI_rest(), i_user)) {
 			return Const.FAIL;
 		}
-		System.out.println(Const.realPath);
+	
 		
 		String path = Const.realPath + "/resources/img/rest/" + param.getI_rest() + "/menu/";
 		

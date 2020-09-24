@@ -113,7 +113,7 @@ public class RestController {
 			, RedirectAttributes ra) {
 		
 		int i_user = SecurityUtils.getLoginUserPk(hs);
-		int result = service.insMenus(param, i_user);
+		int result = service.insRestMenu(param, i_user);
 		ra.addAttribute("i_rest", param.getI_rest());
 		return "redirect:/rest/detail";
 	}
