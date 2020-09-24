@@ -35,7 +35,11 @@ public class RestService {
 		return mapper.selRestList(param);
 	}
 	
-	public List<RestRecMenuVO> selRestRecMenu(RestPARAM param) {		
+	public List<RestRecMenuVO> selRestMenus(RestPARAM param) {
+		return mapper.selRestMenus(param);
+	}
+	
+	public List<RestRecMenuVO> selRestRecMenus(RestPARAM param) {		
 		return mapper.selRestRecMenus(param);
 	}
 
@@ -131,7 +135,6 @@ public class RestService {
 		if(_authFail(param.getI_rest(), i_user)) {
 			return Const.FAIL;
 		}
-	
 		
 		String path = Const.realPath + "/resources/img/rest/" + param.getI_rest() + "/menu/";
 		
@@ -148,8 +151,7 @@ public class RestService {
 		
 		for(RestRecMenuVO vo : list) {
 			mapper.insRestMenu(vo);
-		}
-		
+		}		
 		return Const.SUCCESS;
 	}
 	

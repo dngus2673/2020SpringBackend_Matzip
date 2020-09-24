@@ -67,10 +67,11 @@ public class RestController {
 	public String detail(RestPARAM param, Model model) {
 		RestDMI data = service.selRest(param);
 		
-		model.addAttribute("recMenuList", service.selRestRecMenu(param));
+		model.addAttribute("menuList", service.selRestMenus(param));
+		model.addAttribute("recMenuList", service.selRestRecMenus(param));
+		model.addAttribute("data", data);
 		
 		model.addAttribute("css", new String[]{"restDetail"});
-		model.addAttribute("data", data);
 		model.addAttribute(Const.TITLE, data.getNm()); //가게명
 		model.addAttribute(Const.VIEW, "rest/restDetail");
 		return ViewRef.TEMP_MENU_TEMP;
@@ -108,7 +109,7 @@ public class RestController {
 	}	
 	
 	@RequestMapping("/menus")
-	public String menus(@ModelAttribute RestFile param
+	public String menus(RestFile param
 			, HttpSession hs
 			, RedirectAttributes ra) {
 		
