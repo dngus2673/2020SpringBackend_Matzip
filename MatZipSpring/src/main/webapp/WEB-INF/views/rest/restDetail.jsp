@@ -41,7 +41,7 @@
 				
 				<h2>- 메뉴 -</h2>
 				<div>
-					<form id="menuFrm" action="/restaurant/addMenusProc" enctype="multipart/form-data" method="post">
+					<form id="menuFrm" action="/rest/menus" enctype="multipart/form-data" method="post">
 						<input type="hidden" name="i_rest" value="${data.i_rest}">
 						<input type="file" name="menu_pic" multiple>
 						<div><input type="submit" value="등록"></div>
@@ -129,6 +129,7 @@
 	var idx = 0;
 	function addRecMenu() {
 		var div = document.createElement('div')
+		div.setAttribute('id', 'recMenu_' + idx++)
 		
 		var inputNm = document.createElement('input')
 		inputNm.setAttribute('type', 'text')
@@ -136,16 +137,23 @@
 		var inputPrice = document.createElement('input')
 		inputPrice.setAttribute('type', 'number')
 		inputPrice.setAttribute('name', 'menu_price')
+		inputPrice.value = '0'
 		var inputPic = document.createElement('input')
 		inputPic.setAttribute('type', 'file')
 		inputPic.setAttribute('name', 'menu_pic')
-		
+		var delBtn = document.createElement('input')
+		delBtn.setAttribute('type', 'button')
+		delBtn.setAttribute('value', 'X')		
+		delBtn.addEventListener('click', function() {
+			div.remove()
+		})		
 		div.append('메뉴: ')
 		div.append(inputNm)
 		div.append(' 가격: ')
 		div.append(inputPrice)
 		div.append(' 사진: ')
 		div.append(inputPic)
+		div.append(delBtn)
 		
 		recItem.append(div)
 	}
