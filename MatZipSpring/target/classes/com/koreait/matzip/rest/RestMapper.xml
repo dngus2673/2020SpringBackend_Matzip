@@ -17,6 +17,14 @@
 		WHERE i_rest = #{i_rest}
 	</insert>
 	
+	<insert id="insRestMenu" parameterType="RestRecMenuVO">
+		INSERT INTO t_restaurant_menu
+		(i_rest, seq, menu_pic)
+		SELECT #{i_rest}, ifnull(max(seq), 0) + 1, #{menu_pic}
+		FROM t_restaurant_menu
+		WHERE i_rest = #{i_rest}
+	</insert>
+	
 	<select id="selRestList" parameterType="RestPARAM" resultType="RestDMI">
 		SELECT i_rest, nm, lat, lng
 		FROM t_restaurant
@@ -43,7 +51,7 @@
 			GROUP BY i_rest
 		) D
 		ON A.i_rest = D.i_rest
-		WHERE A.i_rest = #{i_rest} 
+		WHERE A.i_rest = #{i_rest}
 	</select>
 	
 	<select id="selRestRecMenus" parameterType="RestPARAM" resultType="RestRecMenuVO">

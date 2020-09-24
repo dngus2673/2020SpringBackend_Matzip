@@ -108,14 +108,14 @@ public class RestController {
 	}	
 	
 	@RequestMapping("/menus")
-	public String menus(@ModelAttribute RestFile param) {
+	public String menus(@ModelAttribute RestFile param
+			, HttpSession hs
+			, RedirectAttributes ra) {
 		
-		for(MultipartFile file : param.getMenu_pic()) {
-			System.out.println("fileNm : " + file.getOriginalFilename());
-		}
-		//service.insMenus(param);
-		
-		return "redirect:/rest/detail?i_rest=" + param.getI_rest();
+		int i_user = SecurityUtils.getLoginUserPk(hs);
+		int result = service.insMenus(param, i_user);
+		ra.addAttribute("i_rest", param.getI_rest());
+		return "redirect:/rest/detail";
 	}
 }
 
