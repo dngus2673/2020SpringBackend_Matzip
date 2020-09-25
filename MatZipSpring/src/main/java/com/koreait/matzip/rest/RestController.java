@@ -111,8 +111,13 @@ public class RestController {
 		String path = "/resources/img/rest/" + param.getI_rest() + "/rec_menu/";
 		String realPath = hs.getServletContext().getRealPath(path);
 		param.setI_user(SecurityUtils.getLoginUserPk(hs)); //로긴 유저pk담기
-		return service.delRecMenu(param, realPath);
+		return service.delRestRecMenu(param, realPath);
 	}	
+	
+	@RequestMapping("/ajaxDelMenu")
+	@ResponseBody public int ajaxDelMenu(RestPARAM param) {	
+		return service.delRestMenu(param);
+	}
 	
 	@RequestMapping("/menus")
 	public String menus(RestFile param

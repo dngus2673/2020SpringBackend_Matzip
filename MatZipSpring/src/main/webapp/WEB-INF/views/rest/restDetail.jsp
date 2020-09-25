@@ -91,8 +91,6 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-
-	var isMe = ${loginUser.i_user == data.i_user}
 	
 	var menuList = []
 
@@ -109,12 +107,12 @@
 	
 	function refreshMenu() {
 		conMenuList.innerHTML = ''
-		menuList.forEach(function(item) {
-			makeMenuItem(item)
+		menuList.forEach(function(item, idx) {
+			makeMenuItem(item, idx)
 		})
 	}
 	
-	function makeMenuItem(item) {
+	function makeMenuItem(item, idx) {
 		const div = document.createElement('div')
 		div.setAttribute('class', 'menuItem')
 		
@@ -127,8 +125,12 @@
 			const delDiv = document.createElement('div')
 			delDiv.setAttribute('class', 'delIconContainer')
 			delDiv.addEventListener('click', function() {
-				menuList.remove(item)
-				refreshMenu()
+				if(idx > -1) {
+					//서버 삭제 요청!
+					
+					menuList.splice(idx, 1)
+					refreshMenu()	
+				}
 			})
 			
 			const span = document.createElement('span')
@@ -142,6 +144,7 @@
 		conMenuList.append(div)
 	}
 
+	<c:if test="${loginUser.i_user == data.i_user}">
 	function delRecMenu(seq) {
 		if(!confirm('삭제하시겠습니까?')) {
 			return
@@ -162,8 +165,7 @@
 			}
 		})
 	}
-
-	<c:if test="${loginUser.i_user == data.i_user}">
+	
 	var idx = 0;
 	function addRecMenu() {
 		var div = document.createElement('div')
