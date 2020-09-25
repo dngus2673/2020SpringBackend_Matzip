@@ -115,32 +115,28 @@
 		carouselContainer.style.zIndex = -10
 	}
 	
-	function openCarousel() {
+	function openCarousel(idx) {
+		mySwiper.slideTo(idx);
 		carouselContainer.style.opacity = 1
 		carouselContainer.style.zIndex = 40
 	}
-
-	var mySwiper
-	
-	function makeCarousel() {		
-		mySwiper = new Swiper('.swiper-container', {
-			  // Optional parameters
-			  direction: 'horizontal',
-			  loop: false,
-			
-			  // If we need pagination
-			  pagination: {
-			    el: '.swiper-pagination',
-			  },
-			
-			  // Navigation arrows
-			  navigation: {
-			    nextEl: '.swiper-button-next',
-			    prevEl: '.swiper-button-prev',
-			  }
-			})
-	}
-	makeCarousel()
+		
+	var mySwiper = new Swiper('.swiper-container', {
+		  // Optional parameters
+		  direction: 'horizontal',
+		  loop: true,
+		
+		  // If we need pagination
+		  pagination: {
+		    el: '.swiper-pagination',
+		  },
+		
+		  // Navigation arrows
+		  navigation: {
+		    nextEl: '.swiper-button-next',
+		    prevEl: '.swiper-button-prev',
+		  }
+		})
 
 	var menuList = []
 
@@ -151,8 +147,7 @@
 			}
 		}).then(function(res) {
 			menuList = res.data
-			refreshMenu()
-			makeCarousel()
+			refreshMenu()			
 		})
 	}
 	
@@ -172,7 +167,9 @@
 		const img = document.createElement('img')
 		img.setAttribute('src', `/res/img/rest/${data.i_rest}/menu/\${item.menu_pic}`)
 		img.style.cursor = 'pointer'
-		img.addEventListener('click', openCarousel)
+		img.addEventListener('click', function() {
+			openCarousel(idx + 1)
+		})
 		
 		const swiperDiv = document.createElement('div')
 		swiperDiv.setAttribute('class', 'swiper-slide')
