@@ -3,8 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-
-<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 <div style="height:100%;">
 	<div class="recMenuContainer">
 		<c:forEach items="${recMenuList}" var="item">
@@ -92,7 +90,7 @@
 	</div>
 </div>
 
-<div id="carouselContainer">
+<div id="carouselContainer" class="padeShow">
 	<div id="imgContainer">
 		<div class="swiper-container">
 			<div class="swiper-wrapper">
@@ -110,40 +108,43 @@
 			<div class="swiper-button-next"></div>
 		</div>
 	</div>
-	<span class="material-icons">clear</span>
+	<span class="material-icons" onclick="closeCarousel()">clear</span>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script>
 
-	//core version + navigation, pagination modules:
+	function closeCarousel() {
+		carouselContainer.style.opacity = 0
+		carouselContainer.style.zIndex = -10
+	}
 	
-	
-	var mySwiper = new Swiper('.swiper-container', {
-		  // Optional parameters
-		  direction: 'horizontal',
-		  loop: true,
-		
-		  // If we need pagination
-		  pagination: {
-		    el: '.swiper-pagination',
-		  },
-		
-		  // Navigation arrows
-		  navigation: {
-		    nextEl: '.swiper-button-next',
-		    prevEl: '.swiper-button-prev',
-		  },
-		
-		  // And if we need scrollbar
-		  scrollbar: {
-		    el: '.swiper-scrollbar',
-		  },
-		})
+	function openCarousel() {
+		carouselContainer.style.opacity = 1
+		carouselContainer.style.zIndex = 40
+	}
 
+	var mySwiper
 	
-	
+	function makeCarousel() {
+		mySwiper = new Swiper('.swiper-container', {
+			  // Optional parameters
+			  direction: 'horizontal',
+			  loop: true,
+			
+			  // If we need pagination
+			  pagination: {
+			    el: '.swiper-pagination',
+			  },
+			
+			  // Navigation arrows
+			  navigation: {
+			    nextEl: '.swiper-button-next',
+			    prevEl: '.swiper-button-prev',
+			  }
+			})
+	}
 	
 
 	var menuList = []
@@ -172,6 +173,8 @@
 				
 		const img = document.createElement('img')
 		img.setAttribute('src', `/res/img/rest/${data.i_rest}/menu/\${item.menu_pic}`)
+		img.style.cursor = 'pointer'
+		img.addEventListener('click', openCarousel)
 		
 		div.append(img)
 		
@@ -271,6 +274,7 @@
 	addRecMenu()
 	
 	</c:if>
+	makeCarousel()
 	ajaxSelMenuList()
 	
 </script>

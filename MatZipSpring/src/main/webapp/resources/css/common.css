@@ -63,7 +63,7 @@ a {
 
 #container > section {
 	flex-grow: 1;
-	overflow: scroll;
+	overflow: auto;
 }
 
 #container > footer {
