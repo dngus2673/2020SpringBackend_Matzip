@@ -3,7 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<div>
+
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+<div style="height:100%;">
 	<div class="recMenuContainer">
 		<c:forEach items="${recMenuList}" var="item">
 			<div class="recMenuItem" id="recMenuItem_${item.seq}">
@@ -89,9 +91,61 @@
 		</div>
 	</div>
 </div>
+
+<div id="carouselContainer">
+	<div id="imgContainer">
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+			<!-- Slides -->
+			    <div class="swiper-slide">Slide 1</div>
+			    <div class="swiper-slide">Slide 2</div>
+			    <div class="swiper-slide">Slide 3</div>
+			    ...
+			</div>
+			<!-- If we need pagination -->
+			<div class="swiper-pagination"></div>
+			
+			<!-- If we need navigation buttons -->
+			<div class="swiper-button-prev"></div>
+			<div class="swiper-button-next"></div>
+		</div>
+	</div>
+	<span class="material-icons">clear</span>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script>
+
+	//core version + navigation, pagination modules:
 	
+	
+	var mySwiper = new Swiper('.swiper-container', {
+		  // Optional parameters
+		  direction: 'horizontal',
+		  loop: true,
+		
+		  // If we need pagination
+		  pagination: {
+		    el: '.swiper-pagination',
+		  },
+		
+		  // Navigation arrows
+		  navigation: {
+		    nextEl: '.swiper-button-next',
+		    prevEl: '.swiper-button-prev',
+		  },
+		
+		  // And if we need scrollbar
+		  scrollbar: {
+		    el: '.swiper-scrollbar',
+		  },
+		})
+
+	
+	
+	
+
 	var menuList = []
 
 	function ajaxSelMenuList() {
@@ -115,7 +169,7 @@
 	function makeMenuItem(item, idx) {
 		const div = document.createElement('div')
 		div.setAttribute('class', 'menuItem')
-		
+				
 		const img = document.createElement('img')
 		img.setAttribute('src', `/res/img/rest/${data.i_rest}/menu/\${item.menu_pic}`)
 		
