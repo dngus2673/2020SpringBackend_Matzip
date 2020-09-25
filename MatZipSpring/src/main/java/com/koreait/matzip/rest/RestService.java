@@ -99,6 +99,8 @@ public class RestService {
 			
 			//파일 각 저장
 			MultipartFile mf = fileList.get(i);
+			
+			System.out.println("mf.originFileNm : " + mf.getOriginalFilename());
 			String saveFileNm = FileUtils.saveFile(path, mf);
 			vo.setMenu_pic(saveFileNm);	
 		}
@@ -155,28 +157,15 @@ public class RestService {
 		return Const.SUCCESS;
 	}
 	
-	
-	
 	private boolean _authFail(int i_rest, int i_user) {
 		RestPARAM param = new RestPARAM();
-		param.setI_rest(i_rest);
-		
-		RestDMI dbResult = mapper.selRest(param);
-		if(dbResult == null || dbResult.getI_user() != i_user) {
+		param.setI_rest(i_rest);		
+		int dbI_user = mapper.selRestChkUser(i_rest);
+		if(i_user != dbI_user) {
 			return true;
-		}
-		
+		}		
 		return false;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 }

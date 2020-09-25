@@ -31,7 +31,6 @@ public class RestInterceptor extends HandlerInterceptorAdapter {
 				if(i_rest == 0) {
 					return false;
 				}
-				
 				int i_user = SecurityUtils.getLoginUserPk(request);
 				
 				boolean result = _authSuccess(i_rest, i_user);
@@ -39,18 +38,11 @@ public class RestInterceptor extends HandlerInterceptorAdapter {
 				return result;
 			}
 		}
+		System.out.println("!!!=== auth result : true");
 		return true;
 	}
 	
 	private boolean _authSuccess(int i_rest, int i_user) {
-		RestPARAM param = new RestPARAM();
-		param.setI_rest(i_rest);
-		
-		RestDMI dbResult = mapper.selRest(param);
-		if(dbResult == null || dbResult.getI_user() != i_user) {
-			return false;
-		}
-		
-		return true;
+		return i_user == mapper.selRestChkUser(i_rest);
 	}
 }

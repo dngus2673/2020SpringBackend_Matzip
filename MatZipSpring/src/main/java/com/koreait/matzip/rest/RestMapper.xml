@@ -25,6 +25,11 @@
 		WHERE i_rest = #{i_rest}
 	</insert>
 	
+	<select id="selRestChkUser" resultType="Integer" parameterType="Integer">
+		SELECT i_user FROM t_restaurant 
+		WHERE i_rest = #{i_rest}
+	</select>
+	
 	<select id="selRestList" parameterType="RestPARAM" resultType="RestDMI">
 		SELECT i_rest, nm, lat, lng
 		FROM t_restaurant
