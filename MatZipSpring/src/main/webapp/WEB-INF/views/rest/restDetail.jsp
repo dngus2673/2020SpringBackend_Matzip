@@ -90,15 +90,10 @@
 	</div>
 </div>
 
-<div id="carouselContainer" class="padeShow">
+<div id="carouselContainer">
 	<div id="imgContainer">
 		<div class="swiper-container">
-			<div class="swiper-wrapper">
-			<!-- Slides -->
-			    <div class="swiper-slide">Slide 1</div>
-			    <div class="swiper-slide">Slide 2</div>
-			    <div class="swiper-slide">Slide 3</div>
-			    ...
+			<div id="swiperWrapper" class="swiper-wrapper">
 			</div>
 			<!-- If we need pagination -->
 			<div class="swiper-pagination"></div>
@@ -127,11 +122,11 @@
 
 	var mySwiper
 	
-	function makeCarousel() {
+	function makeCarousel() {		
 		mySwiper = new Swiper('.swiper-container', {
 			  // Optional parameters
 			  direction: 'horizontal',
-			  loop: true,
+			  loop: false,
 			
 			  // If we need pagination
 			  pagination: {
@@ -145,7 +140,7 @@
 			  }
 			})
 	}
-	
+	makeCarousel()
 
 	var menuList = []
 
@@ -157,11 +152,14 @@
 		}).then(function(res) {
 			menuList = res.data
 			refreshMenu()
+			makeCarousel()
 		})
 	}
 	
 	function refreshMenu() {
 		conMenuList.innerHTML = ''
+		swiperWrapper.innerHTML = ''
+		
 		menuList.forEach(function(item, idx) {
 			makeMenuItem(item, idx)
 		})
@@ -176,8 +174,17 @@
 		img.style.cursor = 'pointer'
 		img.addEventListener('click', openCarousel)
 		
-		div.append(img)
+		const swiperDiv = document.createElement('div')
+		swiperDiv.setAttribute('class', 'swiper-slide')
 		
+		const swiperImg = document.createElement('img')
+		swiperImg.setAttribute('src', `/res/img/rest/${data.i_rest}/menu/\${item.menu_pic}`)
+		
+		swiperDiv.append(swiperImg)
+		
+		mySwiper.appendSlide(swiperDiv);
+		
+		div.append(img)
 		<c:if test="${loginUser.i_user == data.i_user}">
 			const delDiv = document.createElement('div')
 			delDiv.setAttribute('class', 'delIconContainer')
@@ -274,7 +281,7 @@
 	addRecMenu()
 	
 	</c:if>
-	makeCarousel()
+	
 	ajaxSelMenuList()
 	
 </script>
