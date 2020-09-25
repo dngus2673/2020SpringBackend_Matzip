@@ -127,9 +127,20 @@
 			delDiv.addEventListener('click', function() {
 				if(idx > -1) {
 					//서버 삭제 요청!
-					
-					menuList.splice(idx, 1)
-					refreshMenu()	
+					axios.get('/rest/ajaxDelMenu', {
+						params: {
+							i_rest: ${data.i_rest},
+							seq: item.seq,
+							menu_pic: item.menu_pic
+						}
+					}).then(function(res) {
+						if(res.data == 1) {
+							menuList.splice(idx, 1)
+							refreshMenu()
+						} else {
+							alert('메뉴를 삭제할 수 없습니다.')
+						}
+					})	
 				}
 			})
 			

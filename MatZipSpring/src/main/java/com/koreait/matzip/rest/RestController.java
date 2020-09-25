@@ -115,7 +115,7 @@ public class RestController {
 	}	
 	
 	@RequestMapping("/ajaxDelMenu")
-	@ResponseBody public int ajaxDelMenu(RestPARAM param) {	
+	@ResponseBody public int ajaxDelMenu(RestPARAM param) {	 //i_rest, seq, menu_pic
 		return service.delRestMenu(param);
 	}
 	
