@@ -102,14 +102,19 @@
 	overflow: hidden;
 }
 
-#carouselContainer .material-icons {
+.material-icons {
+	cursor: pointer;	
+}
+
+#carouselContainer > .material-icons {
 	display: inline-block;
-	position: absolute;
-	top: 40px;
-	right: 40px;
-	color: #fff;
+	position: absolute;	
+	color: white;
 	cursor: pointer;
-	font-size: 3rem;
+	font-size: 2rem;
+	background-color: black;
+	top: 20px;
+	right: 20px;
 }
 
 .swiper-container {
@@ -120,6 +125,7 @@
 .swiper-container 
 .swiper-wrapper 
 .swiper-slide {
+	
 	display: flex;
     justify-content: center;
     align-items: center;	
@@ -132,6 +138,25 @@ img {
 	width: 100%;
 	height: auto;
 	overflow: hidden;
+}
+
+.swiper-container .imgDel {
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	z-index: 100;
+	background-color: white;
+}
+
+.swiper-container .imgDel .material-icons {
+	font-size: 3rem;
+	color: black;
+}
+
+.swiper-slide .delIconContainer {
+	position: absolute;
+	top: 10px;
+	left: 10px;
 }
 
 
