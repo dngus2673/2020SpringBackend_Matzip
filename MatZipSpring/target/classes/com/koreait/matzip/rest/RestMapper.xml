@@ -31,10 +31,18 @@
 	</select>
 	
 	<select id="selRestList" parameterType="RestPARAM" resultType="RestDMI">
-		SELECT i_rest, nm, lat, lng
-		FROM t_restaurant
-		WHERE lat BETWEEN #{sw_lat} AND #{ne_lat}
-		AND lng BETWEEN #{sw_lng} AND #{ne_lng}
+		SELECT A.i_rest, A.nm, A.lat, A.lng
+		<if test="i_user > 0">
+			, CASE WHEN B.i_rest IS NULL THEN 0 ELSE 1 END AS is_favorite
+		</if>
+		FROM t_restaurant A
+		<if test="i_user > 0">
+			LEFT JOIN t_user_favorite B
+			ON A.i_rest = B.i_rest
+			AND B.i_user = #{i_user}
+		</if>
+		WHERE A.lat BETWEEN #{sw_lat} AND #{ne_lat}
+		AND A.lng BETWEEN #{sw_lng} AND #{ne_lng}
 	</select>
 	
 	<select id="selRest" parameterType="RestPARAM" resultType="RestDMI">
