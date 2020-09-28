@@ -161,6 +161,7 @@
 	}
 	
 	function makeMenuItem(item, idx) {
+		//메인 화면에서 메뉴 이미지 디스플레이 ------------------------- [start]
 		const div = document.createElement('div')
 		div.setAttribute('class', 'menuItem')
 				
@@ -170,16 +171,6 @@
 		img.addEventListener('click', function() {
 			openCarousel(idx + 1)
 		})
-		
-		const swiperDiv = document.createElement('div')
-		swiperDiv.setAttribute('class', 'swiper-slide')
-		
-		const swiperImg = document.createElement('img')
-		swiperImg.setAttribute('src', `/res/img/rest/${data.i_rest}/menu/\${item.menu_pic}`)
-		
-		swiperDiv.append(swiperImg)
-		
-		mySwiper.appendSlide(swiperDiv);
 		
 		div.append(img)
 		<c:if test="${loginUser.i_user == data.i_user}">
@@ -214,6 +205,21 @@
 		</c:if>
 			
 		conMenuList.append(div)
+		//메인 화면에서 메뉴 이미지 디스플레이 ------------------------- [end]
+		
+		
+		//팝업 화면에서 메뉴 이미지 디스플레이 ------------------------- [start]
+		const swiperDiv = document.createElement('div')
+		swiperDiv.setAttribute('class', 'swiper-slide')
+		
+		const swiperImg = document.createElement('img')
+		swiperImg.setAttribute('src', `/res/img/rest/${data.i_rest}/menu/\${item.menu_pic}`)
+		
+		swiperDiv.append(swiperImg)
+		
+		mySwiper.appendSlide(swiperDiv);
+		
+		//팝업 화면에서 메뉴 이미지 디스플레이 ------------------------- [end]
 	}
 
 	<c:if test="${loginUser.i_user == data.i_user}">

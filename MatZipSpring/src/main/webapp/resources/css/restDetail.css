@@ -74,13 +74,18 @@
 	padding: 5px 0 10px 0;
 }
 
+#sectionContainerCenter {	
+	z-index: 20;
+	overflow: auto;
+}
+
 #carouselContainer {
 	transition: 1s;
 	opacity: 0;
 	z-index: -10;
 	left: 0;
 	top: 0;
-	position: absolute;
+	position: fixed;
 	width: 100%;
 	height: 100%;
 	background-color: #000A;
@@ -89,16 +94,12 @@
 	align-items: center;
 }
 
-#sectionContainerCenter {	
-	z-index: 20;
-	overflow: auto;
-}
-
 #carouselContainer #imgContainer {
 	background-color: #fff;
 	width: 60%;
 	height: 80%;
 	position: relative;
+	overflow: hidden;
 }
 
 #carouselContainer .material-icons {
@@ -129,6 +130,7 @@
 .swiper-slide
 img {
 	width: 100%;
+	height: auto;
 	overflow: hidden;
 }
 
