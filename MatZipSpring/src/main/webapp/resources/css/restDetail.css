@@ -74,6 +74,16 @@
 	padding: 5px 0 10px 0;
 }
 
+.restaurant-detail .restaurant_title_wrap {
+	display: flex;
+	align-items: center;
+}
+
+.restaurant-detail #favorite {
+	margin-left: 20px;
+	color: red;
+}
+
 #sectionContainerCenter {	
 	z-index: 20;
 	overflow: auto;

@@ -2,6 +2,7 @@ package com.koreait.matzip.rest;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +64,13 @@ public class RestController {
 	}
 	
 	@RequestMapping("/detail")
-	public String detail(RestPARAM param, Model model) {
+	public String detail(RestPARAM param, Model model, HttpServletRequest req) {
+		
+		service.addHits(param, req);
+		
+		int i_user = SecurityUtils.getLoginUserPk(req);
+		param.setI_user(i_user);
+		
 		RestDMI data = service.selRest(param);
 		
 		//model.addAttribute("menuList", service.selRestMenus(param));

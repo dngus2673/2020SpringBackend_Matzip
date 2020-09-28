@@ -53,6 +53,13 @@
 				<div id="detail-header">
 					<div class="restaurant_title_wrap">
 						<h1 class="restaurant_name">${data.nm}</h1>
+						
+						<c:if test="${loginUser != null}">
+							<span id="favorite" class="material-icons" onclick="toggleFavorite()">
+								<c:if test="${data.is_favorite == 1}">favorite</c:if>
+								<c:if test="${data.is_favorite == 0}">favorite_border</c:if>
+							</span>
+						</c:if>
 					</div>
 					<div class="status branch_none">
 						<span class="cnt hit">${data.hits}</span>					
@@ -114,6 +121,35 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script>
+
+	function toggleFavorite() {
+		console.log('favorite : ' + favorite.innerText.trim())
+		console.log('favorite : ' + (favorite.innerText.trim() == 'favorite'))
+		
+		let parameter = {
+			params: {
+				i_rest: ${data.i_rest}	
+			}
+		}
+		
+		var icon = favorite.innerText.trim()
+		
+		switch(icon) {
+		case 'favorite':
+			parameter.params.proc_type = 'del'
+			break;
+		case 'favorite_border':
+			parameter.params.proc_type = 'ins'
+			break;
+		}
+		
+		axios.get('/user/ajaxToggleFavorite', parameter).then(function(res) {
+			if(res.data == 1) {
+				favorite.innerText = (icon == 'favorite' ? 'favorite_border' : 'favorite')
+			}
+		})
+		
+	}
 
 	function delMenu() {
 		if(!confirm('삭제하시겠습니까?')) { return }		
