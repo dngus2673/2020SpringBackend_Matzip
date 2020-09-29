@@ -102,7 +102,38 @@ public class UserController {
 		return service.ajaxToggleFavorite(param);
 	}
 	
+	
+	@RequestMapping("/favorite")
+	public String favorite(Model model) {
+		
+		model.addAttribute(Const.CSS, new String[]{"userFavorite"});
+		model.addAttribute(Const.TITLE, "찜");
+		model.addAttribute(Const.VIEW, "user/favorite");
+		return ViewRef.TEMP_MENU_TEMP;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
