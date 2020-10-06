@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.koreait.matzip.Const;
@@ -104,7 +103,12 @@ public class UserController {
 	
 	
 	@RequestMapping("/favorite")
-	public String favorite(Model model) {
+	public String favorite(Model model, HttpSession hs) {
+		int i_user = SecurityUtils.getLoginUserPk(hs);		
+		UserPARAM param = new UserPARAM();
+		param.setI_user(i_user);
+		
+		model.addAttribute("data", service.selFavoriteList(param));
 		
 		model.addAttribute(Const.CSS, new String[]{"userFavorite"});
 		model.addAttribute(Const.TITLE, "찜");

@@ -78,7 +78,6 @@
 		<if test="seq > 0">
 			AND A.seq = #{seq}
 		</if>
-		
 	</select>
 	
 	<select id="selRestMenus" parameterType="RestPARAM" resultType="RestRecMenuVO">
