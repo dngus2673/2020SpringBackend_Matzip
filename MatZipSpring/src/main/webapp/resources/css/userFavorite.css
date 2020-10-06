@@ -18,8 +18,8 @@
 }
 
 .f-item .img {
-	width: 300px;
-	background-color: black;
+	width: 300px;	
+	overflow-y: hidden;
 }
 
 .f-item .img img {

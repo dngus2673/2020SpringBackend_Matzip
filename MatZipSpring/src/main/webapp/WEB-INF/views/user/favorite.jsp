@@ -6,17 +6,17 @@
 	<c:forEach items="${data}" var="item">
 		<div class="f-item">
 			<div class="img">
-				<img src="/res/img/rest/${item.i_rest}/rec_menu/${item.menuList[0].menu_pic}">
+				<img src="/res/img/rest/${item.i_rest}/rec_menu/${item.menuList[0].menu_pic}"
+					 onError="this.style.display='none';">
 			</div>
 			<div class="ctnt">
 				<div class="top">
 					<div class="f-title">
-						<div class="nm font-NotoSans-500">${item.rest_nm}</div>
+						<div class="nm font-NotoSans-500">
+							<a href="/rest/detail?i_rest=${item.i_rest}">${item.rest_nm}</a>
+						</div>
 						<span class="addr">${item.rest_addr }</span>
-					</div>
-					<div class="f-fav">
-						<span class="material-icons">favorite</span>
-					</div>
+					</div>					
 				</div>				
 				<div class="bottom">
 					<c:forEach items="${item.menuList}" var="recMenu" varStatus="status">
