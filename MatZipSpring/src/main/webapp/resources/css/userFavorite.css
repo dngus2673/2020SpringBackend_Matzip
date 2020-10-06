@@ -28,8 +28,7 @@
 }
 
 .f-item .ctnt {
-	flex-grow: 1;
-	background-color: pink;
+	flex-grow: 1;	
 	display: flex;
 	flex-direction: column;
 }
@@ -41,8 +40,7 @@
 }
 
 .f-item .ctnt .bottom {
-	flex-grow: 1;
-	background-color: navy;
+	flex-grow: 1;	
 }
 
 .f-item .ctnt .top .f-title {
@@ -51,9 +49,70 @@
 
 .f-item .ctnt .top .f-title .nm {
 	font-size: 2rem;
+	color: #555;
+}
+
+.f-item .ctnt .top .f-title .addr {
+	font-size: 0.9rem;
+	color: #9b9b9b;
 }
 
 .f-item .ctnt .top .f-fav {
 	width: 100px;
+	text-align: right;
+	
 }
+
+.f-item .ctnt .top .f-fav .material-icons {
+	font-size: 2rem;
+}
+
+.f-item .ctnt .bottom {
+	overflow-x: hidden;
+	display: flex;
+	margin-left: 30px;
+}
+
+.f-item .ctnt .bottom .recMenuItem {
+	width: 110px;
+}
+
+.f-item .ctnt .bottom .recMenuItem:not(:first-child) {
+	margin-left: 3px;
+}
+
+.f-item .ctnt .bottom .recMenuItem .pic {
+	width: 100%;
+}
+
+.f-item .ctnt .bottom .recMenuItem img {
+	width: 100%;
+}	
+
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
